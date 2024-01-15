@@ -16,22 +16,15 @@ jobs:
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
 
-    - name: Initialize Git repository
-      run: |
-        git init
-        git remote add origin https://github.com/immortalwrt/immortalwrt.git
-
-    - name: Fetch openwrt-23.05 branch
-      run: git fetch --depth=1 origin openwrt-23.05
-
     - name: Clone emortal package from immortalwrt
       run: |
-        git checkout -b openwrt-23.05 origin/openwrt-23.05
-        mkdir -p emortal
-        cp -R immortalwrt/package/emortal/* emortal
+        git clone --branch openwrt-23.05 https://github.com/immortalwrt/immortalwrt.git --depth 1 --single-branch emortal_temp
+        mv emortal_temp/package/emortal .
+        rm -rf emortal_temp
 
     - name: Commit and push changes
       run: |
+        git init
         git add emortal
         git commit -m "Update emortal package from immortalwrt/openwrt-23.05"
         git push origin main
