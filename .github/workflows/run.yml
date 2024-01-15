@@ -1,0 +1,29 @@
+name: Clone emortal package from immortalwrt/openwrt-23.05
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run every day at midnight UTC
+
+jobs:
+  clone-emortal-package:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Git
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+
+    - name: Clone emortal package from immortalwrt
+      run: |
+        git clone --branch openwrt-23.05 https://github.com/immortalwrt/immortalwrt.git --depth 1 --single-branch emortal_temp
+        mv emortal_temp/package/emortal .
+        rm -rf emortal_temp
+
+    - name: Commit and push changes
+      run: |
+        git add emortal
+        git commit -m "Update emortal package from immortalwrt/openwrt-23.05"
+        git push
