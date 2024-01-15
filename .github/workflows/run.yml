@@ -28,7 +28,7 @@ jobs:
       run: |
         git checkout -b openwrt-23.05 origin/openwrt-23.05
         mkdir -p emortal
-        cp -R emortal_temp/package/emortal/* emortal
+        cp -R immortalwrt/package/emortal/* emortal
 
     - name: Commit and push changes
       run: |
