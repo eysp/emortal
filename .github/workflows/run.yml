@@ -32,4 +32,4 @@ jobs:
       run: |
         git add emortal
         git commit -m "Update emortal package from immortalwrt/openwrt-23.05"
-        git push origin openwrt-23.05
+        git push origin main
