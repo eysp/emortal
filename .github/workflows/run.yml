@@ -25,6 +25,7 @@ jobs:
     - name: Commit and push changes
       run: |
         git init
+        git config --global init.defaultBranch main
         git add emortal
         git commit -m "Update emortal package from immortalwrt/openwrt-23.05"
         git push origin main
